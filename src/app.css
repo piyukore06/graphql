@@ -1,0 +1,53 @@
+.underline {
+  position: relative;
+  padding-bottom: 2px;
+  text-decoration: none;
+}
+.underline::after {
+  content: "";
+  position: absolute;
+  bottom: 2px;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background: rgb(218, 68, 83);
+  background: linear-gradient(to right, rgb(218, 68, 83), rgb(137, 33, 107));
+  border-radius: 50%;
+}
+
+canvas {
+  display: block;
+}
+
+.text-on {
+	position: absolute;
+	top: 50%;
+	right: 50%;
+	transform: translate(50%,-50%);
+	color: white;
+	max-width: 90%;
+	padding: 2em 3em;
+	background: rgba(255, 255, 255, 0.2);
+}
+
+.name {
+  background: linear-gradient(to top, rgb(218, 68, 83), rgb(137, 33, 107));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+h1 {
+  font-size: 72px;
+}
+
+.border-all {
+    position: absolute;
+    height: 1000px;
+    width: 1000px;
+    left: -50%;
+    top: -150px;
+    transform: rotate(60deg);
+    border: 1px solid transparent;
+    border-image: linear-gradient(to top, rgb(218, 68, 83), rgb(137, 33, 107));
+    border-image-slice: 1;
+}
