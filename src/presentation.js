@@ -27,6 +27,7 @@ import twitter from './assets/twitter.png'
 import fb from './assets/fb.png'
 import one from './assets/11.png'
 import two from './assets/21.png'
+import graphql from './assets/graphql.png'
 import './app.css'
 // Require CSS
 require('normalize.css');
@@ -323,7 +324,9 @@ export default class Presentation extends React.Component {
             <span role="img" aria-label="super">👌🏻</span>
           </Heading>
         </Slide>
-
+        <Slide transition={['fade']} >
+            <img src={graphql} alt="GraphQL"/>
+        </Slide>
         <Slide transition={['fade']} textColor="tertiary">
         <Notes>
             <h4>examples of how each thing looks and behaves
@@ -335,14 +338,16 @@ export default class Presentation extends React.Component {
           <List ordered={false} style={{ listStyleType: 'none', transform: 'scale(0.8)' }} >
             <ListItem margin="8"> <span role="img" aria-label="next">✨</span> Query</ListItem>
             <ListItem margin="8"> <span role="img" aria-label="next">⭐️</span> Mutation</ListItem>
+            <ListItem margin="8"> <span role="img" aria-label="next">⚡️</span> Subscriptions</ListItem>
             <ListItem margin="8"> <span role="img" aria-label="next">💫</span> Resolvers</ListItem>
           </List>
           
         </Slide>
         <Slide transition={['fade']} >
-          <Text> But, is that really
-          </Text>
+          <Text>But, is that really</Text>
             <Heading size={3} caps> <span className="underline">enough</span></Heading>
+            <Text>to start using</Text>
+            <Heading size={2} caps> <span className="name">GraphQL</span></Heading>
         </Slide>
         <Slide transition={['fade']} textColor="tertiary">
           <Text>Modern&nbsp;
@@ -350,7 +355,7 @@ export default class Presentation extends React.Component {
             are generally concerned with
           </Text>
           <List ordered={false} style={{ listStyleType: 'none', transform: 'scale(0.8)' }} >
-            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Efficiancy</ListItem>
+            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Efficiency</ListItem>
           </List>
         </Slide>
         <Slide transition={['fade']} textColor="tertiary">
@@ -359,7 +364,7 @@ export default class Presentation extends React.Component {
             are generally concerned with
           </Text>
           <List ordered={false} style={{ listStyleType: 'none', transform: 'scale(0.8)' }} >
-            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Efficiancy</ListItem>
+            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Efficiency</ListItem>
             <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Predictability</ListItem>
           </List>
         </Slide>
@@ -369,21 +374,9 @@ export default class Presentation extends React.Component {
             are generally concerned with
           </Text>
           <List ordered={false} style={{ listStyleType: 'none', transform: 'scale(0.8)' }} >
-            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Efficiancy</ListItem>
-            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Predictability</ListItem>
-            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Versioning</ListItem>
-          </List>
-        </Slide>
-        <Slide transition={['fade']} textColor="tertiary">
-          <Text>Modern&nbsp;
-            <span className="underline">APIs</span>&nbsp;
-            are generally concerned with
-          </Text>
-          <List ordered={false} style={{ listStyleType: 'none', transform: 'scale(0.8)' }} >
-            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Efficiancy</ListItem>
+            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Efficiency</ListItem>
             <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Predictability</ListItem>
             <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Versioning</ListItem>
-            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Security</ListItem>
           </List>
         </Slide>
         <Slide transition={['fade']} textColor="tertiary">
@@ -392,40 +385,51 @@ export default class Presentation extends React.Component {
             are generally concerned with
           </Text>
           <List ordered={false} style={{ listStyleType: 'none', transform: 'scale(0.8)' }} >
-            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Efficiancy</ListItem>
+            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Efficiency</ListItem>
             <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Predictability</ListItem>
             <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Versioning</ListItem>
             <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Security</ListItem>
-            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Documentation</ListItem>
           </List>
         </Slide>
         <Slide transition={['fade']} textColor="tertiary">
-          <Text>Modern&nbsp;
-            <span className="underline">APIs</span>&nbsp;
-            are generally concerned with
+          <Text>What are the constraints&nbsp;
+            <span className="underline">Modern APIs</span>&nbsp; generally concerned with?
           </Text>
           <List ordered={false} style={{ listStyleType: 'none', transform: 'scale(0.8)' }} >
-            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Efficiancy</ListItem>
+            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Efficiency</ListItem>
             <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Predictability</ListItem>
             <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Versioning</ListItem>
             <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Security</ListItem>
-            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Documentation</ListItem>
-            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Caching</ListItem>
-          </List>
-        </Slide>
-        <Slide transition={['fade']} textColor="tertiary">
-          <Text>Modern&nbsp;
-            <span className="underline">APIs</span>&nbsp;
-            are generally concerned with
-          </Text>
-          <List ordered={false} style={{ listStyleType: 'none', transform: 'scale(0.8)' }} >
-            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Efficiancy</ListItem>
-            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Predictability</ListItem>
-            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Versioning</ListItem>
-            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Security</ListItem>
-            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Documentation</ListItem>
-            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Caching</ListItem>
             <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Tooling</ListItem>
+          </List>
+        </Slide>
+        <Slide transition={['fade']} textColor="tertiary">
+          <Text>Modern&nbsp;
+            <span className="underline">APIs</span>&nbsp;
+            are generally concerned with
+          </Text>
+          <List ordered={false} style={{ listStyleType: 'none', transform: 'scale(0.8)' }} >
+            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Efficiency</ListItem>
+            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Predictability</ListItem>
+            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Versioning</ListItem>
+            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Security</ListItem>
+            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Tooling</ListItem>
+            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Documentation</ListItem>
+          </List>
+        </Slide>
+        <Slide transition={['fade']} textColor="tertiary">
+          <Text>Modern&nbsp;
+            <span className="underline">APIs</span>&nbsp;
+            are generally concerned with
+          </Text>
+          <List ordered={false} style={{ listStyleType: 'none', transform: 'scale(0.8)' }} >
+            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Efficiency</ListItem>
+            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Predictability</ListItem>
+            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Versioning</ListItem>
+            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Security</ListItem>
+            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Tooling</ListItem>
+            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Documentation</ListItem>
+            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Caching</ListItem>
           </List>
         </Slide>
         <Slide transition={['fade']} textColor="tertiary">
@@ -433,7 +437,7 @@ export default class Presentation extends React.Component {
             Showing is better than talking
           </Text>
           <Heading caps size={3}>
-            <span className="underline">Demo</span>
+            <span className="underline">Demo <span role="img" aria-label="Demo">💁🏻‍♀️</span></span>
           </Heading>
         </Slide>
         <Slide transition={['fade']} textColor="tertiary">
