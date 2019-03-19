@@ -12,6 +12,7 @@ import {
   Text,
   CodePane,
   Notes,
+  Fit,
 } from 'spectacle';
 import Particles from 'react-particles-js';
 import Slide from './octocat';
@@ -23,14 +24,125 @@ import logo from './assets/logo.png';
 import github from './assets/github.png';
 import twitter from './assets/twitter.png';
 
-import fb from './assets/fb.png';
-import one from './assets/11.png';
-import two from './assets/21.png';
+import img from './assets/twitter-img.png';
+import basic from './assets/tweet-basic.png';
+import zero from './assets/tweet.png';
+import one from './assets/tweet-1.png';
+import two from './assets/tweet-2.png';
+import three from './assets/tweet-3.png';
+import four from './assets/tweet-4.png';
+
 import graphql from './assets/graphql.png';
+import graphql1 from './assets/graphql1.png';
 import './app.css';
+import './../node_modules/prismjs/themes/prism.css';
 // Require CSS
 require('normalize.css');
 
+const exampleDeck = `
+  {
+    query tweet(id: ID!) {
+      id
+      title
+      likesCount
+      retweetCount
+      commentsCount
+      likes(last: 1) {
+        likedBy {
+          name
+        }
+      }
+      comments(last: 1) {
+        text
+        commentedBy {
+          name
+          timestamp
+        }
+        likeCount
+        likedBy {
+          name
+        }
+      }
+    } 
+  }
+`.trim();
+
+const schema = `
+type Book {
+  title: String
+  author: Author
+}
+
+type Author {
+  name: String
+  books: [Book]
+}
+`.trim();
+
+const query1 = `
+type Query {
+  getBooks: [Book]
+  getAuthors: [Author]
+}
+`.trim();
+
+const query2 = `
+query {
+  getBooks {
+    title
+    author {
+      name
+    }
+  }
+
+  getAuthors {
+    name
+  }
+}
+`.trim();
+
+const mutation1 = `
+type Mutation {
+  addBook(title: String, author: String): Book
+}
+`.trim();
+
+const mutation2 = `
+mutation {
+  addBook(title: "Fox in Socks", author: "Dr. Seuss") {
+    title
+    author {
+      name
+    }
+  }
+}
+`.trim();
+
+const resolver = `
+const resolvers = {
+  Query: {
+    author(parent, args, context, info) {
+      return find(authors, { id: args.id });
+    },
+  },
+};
+`.trim();
+
+const subscription1 = `
+type Subscription {
+  bookAdded: Book
+}
+`;
+
+const subscription2 = `
+const resolvers = {
+  Subscription: {
+    bookAdded: {
+      subscribe: () => pubsub.asyncIterator([BOOK_ADDED]),
+    },
+  },
+};
+`.trim();
 const theme = createTheme(
   {
     primary: 'white',
@@ -48,13 +160,13 @@ export default class Presentation extends React.Component {
   render() {
     return (
       <Deck
-        transition={['zoom', 'slide']}
         transitionDuration={500}
         theme={theme}
         progress="none"
         showFullscreenControl={false}
       >
-        <Slide transition={['zoom']} bgColor="primary">
+        <Slide>
+          <Text style={{fontSize: '60px'}}>Going</Text>
           <Heading size={1} className="name">
             GraphQL
           </Heading>
@@ -82,72 +194,98 @@ export default class Presentation extends React.Component {
           </Layout>
 
         </Slide>
-        <Slide transition={['fade']}>
+        <Slide>
           <Heading size={6}>
             So, I'm building this <span className="underline">application</span>
           </Heading>
         </Slide>
-        <Slide transition={['fade']} bgColor="primary" textColor="tertiary">
-          <img src={fb} alt="" width="800" />
+        <Slide>
+          <img src={img} alt="" width="1000" />
         </Slide>
-        <Slide transition={['fade']} bgColor="primary" textColor="tertiary">
-          <img src={one} alt="" width="400" />
+        <Slide>
+          <img src={basic} alt="" width="600" />
         </Slide>
-        <Slide transition={['fade']} bgColor="primary" textColor="tertiary">
+        <Slide>
           <Layout>
-            <Fill><img src={one} alt="" width="400" /></Fill>
+            <Fill><img src={zero} alt="" width="400" /></Fill>
             <Fill>
               <List ordered={false} style={{ listStyleType: 'none' }}>
-                <ListItem margin="4"> <span role="img" aria-label="next">👉🏻</span> /posts</ListItem>
+                <ListItem margin="4"> <span role="img" aria-label="next">👉🏻</span> /tweets</ListItem>
               </List>
             </Fill>
           </Layout>
         </Slide>
-        <Slide transition={['fade']} bgColor="primary" textColor="tertiary">
+        <Slide>
           <Layout>
             <Fill><img src={one} alt="" width="400" /></Fill>
             <Fill>
               <List ordered={false} style={{ listStyleType: 'none' }}>
-                <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> /posts</ListItem>
-                <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> /post/:id</ListItem>
+                <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> /tweets</ListItem>
+                <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> /tweet/:id</ListItem>
               </List>
             </Fill>
           </Layout>
         </Slide>
-        <Slide transition={['fade']} bgColor="primary" textColor="tertiary">
+        <Slide>
           <Layout>
             <Fill><img src={two} alt="" width="400" /></Fill>
             <Fill>
               <List ordered={false} style={{ listStyleType: 'none' }}>
-                <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> /posts</ListItem>
-                <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> /post/:id</ListItem>
-                <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> /post/:id/likes</ListItem>
+                <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> /tweets</ListItem>
+                <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> /tweet/:id</ListItem>
                 <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> /user/:id</ListItem>
-                <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> /post/:id/comments</ListItem>
-                <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> /post/:id/blaahh</ListItem>
               </List>
             </Fill>
           </Layout>
         </Slide>
-        <Slide transition={['fade']} bgColor="primary" textColor="tertiary">
+        <Slide>
+          <Layout>
+            <Fill><img src={three} alt="" width="400" /></Fill>
+            <Fill>
+              <List ordered={false} style={{ listStyleType: 'none' }}>
+                <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> /tweets</ListItem>
+                <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> /tweet/:id</ListItem>
+                <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> /user/:id</ListItem>
+                <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> /tweet/:id/likes</ListItem>
+                <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> /tweet/:id/retweets</ListItem>
+              </List>
+            </Fill>
+          </Layout>
+        </Slide>
+        <Slide>
+          <Layout>
+            <Fill><img src={four} alt="" width="400" /></Fill>
+            <Fill>
+              <List ordered={false} style={{ listStyleType: 'none' }}>
+                <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> /tweets</ListItem>
+                <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> /tweet/:id</ListItem>
+                <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> /user/:id</ListItem>
+                <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> /tweet/:id/likes</ListItem>
+                <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> /tweet/:id/retweets</ListItem>
+                <ListItem margin=""> <span role="img" aria-label="next">👉🏻</span> /tweet/:id/comments</ListItem>
+              </List>
+            </Fill>
+          </Layout>
+        </Slide>
+        <Slide>
           <List ordered={false} style={{ listStyleType: 'none', transform: 'scale(0.8)' }}>
-            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> v-22/posts/</ListItem>
-            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> /post/:id/with-likes-n-comments</ListItem>
+            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> v-22/tweets/</ListItem>
+            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> /tweet/:id/with-likes-n-comments</ListItem>
           </List>
         </Slide>
-        <Slide transition={['fade']} bgColor="primary" textColor="tertiary">
+        <Slide>
           <List ordered={false} style={{ listStyleType: 'none', transform: 'scale(0.8)' }}>
-            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> v-22/posts/</ListItem>
-            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> /post/:id/with-likes-n-comments</ListItem>
-            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> /post/:id/with-likes-n-comments-likes-on-comments</ListItem>
+            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> v-22/tweets/</ListItem>
+            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> /tweet/:id/with-likes-n-comments</ListItem>
+            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> /tweet/:id/with-likes-n-comments-likes-on-comments</ListItem>
           </List>
         </Slide>
-        <Slide transition={['fade']} bgColor="primary" textColor="tertiary">
+        <Slide>
           <List ordered={false} style={{ listStyleType: 'none', transform: 'scale(0.8)' }}>
-            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> v-22/posts/</ListItem>
-            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> /post/:id/with-likes-n-comments</ListItem>
-            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> /post/:id/with-likes-n-comments-likes-on-comments</ListItem>
-            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> /post/:id/with-likes-n-comments-likes-n-replies-on-comments</ListItem>
+            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> v-22/tweets/</ListItem>
+            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> /tweet/:id/with-likes-n-comments</ListItem>
+            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> /tweet/:id/with-likes-n-comments-likes-on-comments</ListItem>
+            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> /tweet/:id/with-likes-n-comments-likes-n-replies-on-comments</ListItem>
           </List>
         </Slide>
         <Slide>
@@ -157,7 +295,7 @@ export default class Presentation extends React.Component {
         </Slide>
 
         <Fill>
-          <Particles style={{ background: 'linear-gradient(to top, rgb(218, 68, 83), rgb(137, 33, 107))' }} params={{
+          <Particles className="particles-js" style={{ background: 'linear-gradient(to top, rgb(218, 68, 83), rgb(137, 33, 107))'}} params={{
             "particles": {
               "number": {
                 "value": 250,
@@ -271,66 +409,52 @@ export default class Presentation extends React.Component {
             <h1>GraphQL</h1>
           </div>
         </Fill>
-        <Slide transition={['fade']} bgColor="primary" textColor="tertiary">
+        <Slide>
+            <img src={graphql1} width="1000" alt="GraphQL"/>
+        </Slide>
+        {/* <Slide>
+            <img src={graphql} width="1000" alt="GraphQL"/>
+        </Slide> */}
+        <Slide>
           <Layout>
-            <Fill><img src={two} alt="" width="400" /></Fill>
+            <Fill><img src={four} alt="" width="400" /></Fill>
             <Fill>
               <List ordered={false} style={{ listStyleType: 'none', transform: 'scale(0.8)', marginTop: '40%' }}>
-                <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> /posts/all-the-things-i-want</ListItem>
+                <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> /graphql</ListItem>
               </List>
             </Fill>
           </Layout>
         </Slide>
-        <Slide transition={['fade']} bgColor="primary" textColor="tertiary">
+        <Slide>
           <Layout>
             <Fill><img src={two} alt="" width="400" /></Fill>
             <Fill>
-              <CodePane lang={'javascript'} source={
-                `{
-                  query post(id: ID!) {
-                    id
-                    title
-                    description
-                    images
-                    likesCount
-                    commentsCount
-                    likes(last) {
-                      likedBy {
-                        name
-                      }
-                    }
-                    comments(last) {
-                      text
-                      commentedBy {
-                        name
-                        timestamp
-                      }
-                      likeCount
-                      likedBy {
-                        name
-                      }
-                    }
-                  } 
-                }`
-              }>
-                
-              </CodePane>
+              <CodePane
+                lang="js"
+                source={exampleDeck}
+                theme="light"
+                style={{fontSize: '15px'}}
+              />
             </Fill>
           </Layout>
         </Slide>
-        <Slide transition={['fade']} >
+        <Slide>
           <Heading size={3}>
             <span role="img" aria-label="super">👌🏻</span>
           </Heading>
         </Slide>
-        <Slide transition={['fade']} >
-            <img src={graphql} alt="GraphQL"/>
+
+        <Slide>
+          <Text>
+            <span className="underline">Client</span>&nbsp; driven development
+          </Text>
         </Slide>
-        <Slide transition={['fade']} textColor="tertiary">
-        <Notes>
-            <h4>examples of how each thing looks and behaves
-            </h4>
-          </Notes>
+        <Slide>
+          <Text>
+            Language&nbsp;<span className="underline">agnostic</span>
+          </Text>
+        </Slide>
+        <Slide>
           <Text>
             <span className="underline">Concepts</span>
           </Text>
@@ -338,101 +462,137 @@ export default class Presentation extends React.Component {
             <ListItem margin="8"> <span role="img" aria-label="next">☀️</span> Schema</ListItem>
             <ListItem margin="8"> <span role="img" aria-label="next">✨</span> Query</ListItem>
             <ListItem margin="8"> <span role="img" aria-label="next">⭐️</span> Mutation</ListItem>
-            <ListItem margin="8"> <span role="img" aria-label="next">⚡️</span> Subscriptions</ListItem>
             <ListItem margin="8"> <span role="img" aria-label="next">💫</span> Resolvers</ListItem>
+            <ListItem margin="8"> <span role="img" aria-label="next">⚡️</span> Subscriptions</ListItem>
           </List>
           
         </Slide>
-        <Slide transition={['fade']} >
+        <Slide>
+          <Text><span role="img" aria-label="next">☀️</span><span className="underline">Schema</span></Text>
+          <br />  
+          <CodePane
+            lang="js"
+            source={schema}
+            theme="light"
+            style={{fontSize: '15px', width: '500px', minWidth: 'unset'}}
+          />
+        </Slide>
+        
+        
+        <Slide>
+          <Text><span role="img" aria-label="next">✨</span><span className="underline">Query</span></Text>
+          <Layout>
+            <Fit>
+              <CodePane
+                margin={10}
+                lang="js"
+                source={query1}
+                theme="light"
+                style={{fontSize: '15px', width: '500px', minWidth: 'unset'}}
+              />
+            </Fit>
+            <Fit>
+            <CodePane
+                margin={10}
+                lang="js"
+                source={query2}
+                theme="light"
+                style={{fontSize: '15px', width: '500px', minWidth: 'unset'}}
+              />
+            </Fit>
+          </Layout>
+        </Slide>
+
+        <Slide>
+          <Text><span role="img" aria-label="next">⭐️</span><span className="underline">Mutation</span></Text>
+          <Layout>
+            <Fit>
+              <CodePane
+                margin={10}
+                lang="js"
+                source={mutation1}
+                theme="light"
+                style={{fontSize: '15px', width: '500px', minWidth: 'unset'}}
+              />
+            </Fit>
+            <Fit>
+            <CodePane
+                margin={10}
+                lang="js"
+                source={mutation2}
+                theme="light"
+                style={{fontSize: '15px', width: '500px', minWidth: 'unset'}}
+              />
+            </Fit>
+          </Layout>
+        </Slide>
+        <Slide>
+          <Text><span role="img" aria-label="next">💫</span><span className="underline">Resolvers</span></Text>
+          <br />  
+          <CodePane
+            lang="js"
+            source={resolver}
+            theme="light"
+            style={{fontSize: '15px', width: '500px', minWidth: 'unset'}}
+          />
+        </Slide>
+
+        <Slide>
+          <Text><span role="img" aria-label="next">⚡️</span><span className="underline">Subscription</span></Text>
+          <Layout>
+            <Fit>
+              <CodePane
+                margin={10}
+                lang="js"
+                source={subscription1}
+                theme="light"
+                style={{fontSize: '15px', width: '500px', minWidth: 'unset'}}
+              />
+            </Fit>
+            <Fit>
+            <CodePane
+                margin={10}
+                lang="js"
+                source={subscription2}
+                theme="light"
+                style={{fontSize: '15px', width: '600px', minWidth: 'unset'}}
+              />
+            </Fit>
+          </Layout>
+        </Slide>
+        <Slide>
           <Text>But, is that really</Text>
-            <Heading size={3} caps> <span className="underline">enough</span></Heading>
+            <Heading size={4} caps> <span>enough</span></Heading>
             <Text>to start using</Text>
-            <Heading size={2} caps> <span className="name">GraphQL</span></Heading>
+            <Heading size={3} caps> <span className="name">GraphQL</span></Heading>
         </Slide>
-        <Slide transition={['fade']} textColor="tertiary">
-          <Text>Modern&nbsp;
-            <span className="underline">APIs</span>&nbsp;
-            are generally concerned with
-          </Text>
-          <List ordered={false} style={{ listStyleType: 'none', transform: 'scale(0.8)' }} >
-            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Efficiency</ListItem>
-          </List>
-        </Slide>
-        <Slide transition={['fade']} textColor="tertiary">
-          <Text>Modern&nbsp;
-            <span className="underline">APIs</span>&nbsp;
-            are generally concerned with
-          </Text>
-          <List ordered={false} style={{ listStyleType: 'none', transform: 'scale(0.8)' }} >
-            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Efficiency</ListItem>
-            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Predictability</ListItem>
-          </List>
-        </Slide>
-        <Slide transition={['fade']} textColor="tertiary">
-          <Text>Modern&nbsp;
-            <span className="underline">APIs</span>&nbsp;
-            are generally concerned with
-          </Text>
-          <List ordered={false} style={{ listStyleType: 'none', transform: 'scale(0.8)' }} >
-            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Efficiency</ListItem>
-            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Predictability</ListItem>
-            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Versioning</ListItem>
-          </List>
-        </Slide>
-        <Slide transition={['fade']} textColor="tertiary">
-          <Text>Modern&nbsp;
-            <span className="underline">APIs</span>&nbsp;
-            are generally concerned with
-          </Text>
-          <List ordered={false} style={{ listStyleType: 'none', transform: 'scale(0.8)' }} >
-            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Efficiency</ListItem>
-            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Predictability</ListItem>
-            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Versioning</ListItem>
-            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Security</ListItem>
-          </List>
-        </Slide>
-        <Slide transition={['fade']} textColor="tertiary">
+        <Slide>
           <Text>What are the constraints&nbsp;
             <span className="underline">Modern APIs</span>&nbsp; generally concerned with?
           </Text>
-          <List ordered={false} style={{ listStyleType: 'none', transform: 'scale(0.8)' }} >
-            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Efficiency</ListItem>
-            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Predictability</ListItem>
-            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Versioning</ListItem>
-            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Security</ListItem>
-            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Tooling</ListItem>
-          </List>
         </Slide>
-        <Slide transition={['fade']} textColor="tertiary">
-          <Text>Modern&nbsp;
-            <span className="underline">APIs</span>&nbsp;
-            are generally concerned with
-          </Text>
-          <List ordered={false} style={{ listStyleType: 'none', transform: 'scale(0.8)' }} >
-            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Efficiency</ListItem>
-            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Predictability</ListItem>
-            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Versioning</ListItem>
-            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Security</ListItem>
-            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Tooling</ListItem>
-            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Documentation</ListItem>
-          </List>
+        <Slide>
+          <Text>1. Efficiency</Text>
         </Slide>
-        <Slide transition={['fade']} textColor="tertiary">
-          <Text>Modern&nbsp;
-            <span className="underline">APIs</span>&nbsp;
-            are generally concerned with
-          </Text>
-          <List ordered={false} style={{ listStyleType: 'none', transform: 'scale(0.8)' }} >
-            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Efficiency</ListItem>
-            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Predictability</ListItem>
-            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Versioning</ListItem>
-            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Security</ListItem>
-            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Tooling</ListItem>
-            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Documentation</ListItem>
-            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Caching</ListItem>
-          </List>
+        <Slide>
+          <Text>2. Predictability</Text>
         </Slide>
-        <Slide transition={['fade']} textColor="tertiary">
+        <Slide>
+          <Text>3. Versioning</Text>
+        </Slide>
+        <Slide>
+          <Text>4. Security</Text>
+        </Slide>
+        <Slide>
+          <Text>5. Tooling</Text>
+        </Slide>
+        <Slide>
+          <Text>6. Documentation</Text>
+        </Slide>
+        <Slide>
+          <Text>7. Caching</Text>
+        </Slide>
+        <Slide>
           <Text>
             Showing is better than talking
           </Text>
@@ -440,15 +600,10 @@ export default class Presentation extends React.Component {
             <span className="underline">Demo <span role="img" aria-label="Demo">💁🏻‍♀️</span></span>
           </Heading>
         </Slide>
-        <Slide transition={['fade']} textColor="tertiary">
-          <Text><span className="underline">Disadvantages</span></Text>
-          <List ordered={false} style={{ listStyleType: 'none', transform: 'scale(0.8)' }} >
-            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Paradigm Shift</ListItem>
-          </List>
-        </Slide>
-        <Slide transition={['fade']} textColor="tertiary">
+        <Slide>
           <Heading size={3}><span role="img" aria-label="namaste">🙏🏻</span></Heading>
           <Text>Thank you!</Text>
+          <p>http://intro-to-graphql.surge.sh</p>
         </Slide>
       </Deck>
     );
