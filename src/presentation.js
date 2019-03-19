@@ -7,7 +7,6 @@ import {
   Heading,
   ListItem,
   List,
-  Slide,
   Layout,
   Fill,
   Text,
@@ -15,20 +14,20 @@ import {
   Notes,
 } from 'spectacle';
 import Particles from 'react-particles-js';
-
+import Slide from './octocat';
 // Import theme
 import createTheme from 'spectacle/lib/themes/default';
 
-import imageSrc from './assets/222.jpg'
-import logo from './assets/logo.png'
-import github from './assets/github.png'
-import twitter from './assets/twitter.png'
+import imageSrc from './assets/222.jpg';
+import logo from './assets/logo.png';
+import github from './assets/github.png';
+import twitter from './assets/twitter.png';
 
-import fb from './assets/fb.png'
-import one from './assets/11.png'
-import two from './assets/21.png'
-import graphql from './assets/graphql.png'
-import './app.css'
+import fb from './assets/fb.png';
+import one from './assets/11.png';
+import two from './assets/21.png';
+import graphql from './assets/graphql.png';
+import './app.css';
 // Require CSS
 require('normalize.css');
 
@@ -336,6 +335,7 @@ export default class Presentation extends React.Component {
             <span className="underline">Concepts</span>
           </Text>
           <List ordered={false} style={{ listStyleType: 'none', transform: 'scale(0.8)' }} >
+            <ListItem margin="8"> <span role="img" aria-label="next">☀️</span> Schema</ListItem>
             <ListItem margin="8"> <span role="img" aria-label="next">✨</span> Query</ListItem>
             <ListItem margin="8"> <span role="img" aria-label="next">⭐️</span> Mutation</ListItem>
             <ListItem margin="8"> <span role="img" aria-label="next">⚡️</span> Subscriptions</ListItem>
