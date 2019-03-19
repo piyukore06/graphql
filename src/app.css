@@ -41,13 +41,9 @@ h1 {
 }
 
 .border-all {
-    position: absolute;
-    height: 1000px;
-    width: 1000px;
-    left: -50%;
-    top: -150px;
-    transform: rotate(60deg);
     border: 1px solid transparent;
     border-image: linear-gradient(to top, rgb(218, 68, 83), rgb(137, 33, 107));
     border-image-slice: 1;
+    transform: rotate(45deg);
+    padding: 10px;
 }
