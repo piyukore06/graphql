@@ -144,20 +144,9 @@ export default class Presentation extends React.Component {
         </Slide>
         <Slide>
           <Layout>
-            <Fill><img src={zero} alt="" width="400" /></Fill>
-            <Fill>
-              <List ordered={false} style={{ listStyleType: 'none' }}>
-                <ListItem margin="4"> <span role="img" aria-label="next">👉🏻</span> /tweets</ListItem>
-              </List>
-            </Fill>
-          </Layout>
-        </Slide>
-        <Slide>
-          <Layout>
             <Fill><img src={one} alt="" width="400" /></Fill>
             <Fill>
               <List ordered={false} style={{ listStyleType: 'none' }}>
-                <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> /tweets</ListItem>
                 <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> /tweet/:id</ListItem>
               </List>
             </Fill>
@@ -168,7 +157,6 @@ export default class Presentation extends React.Component {
             <Fill><img src={two} alt="" width="400" /></Fill>
             <Fill>
               <List ordered={false} style={{ listStyleType: 'none' }}>
-                <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> /tweets</ListItem>
                 <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> /tweet/:id</ListItem>
                 <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> /user/:id</ListItem>
               </List>
@@ -180,7 +168,6 @@ export default class Presentation extends React.Component {
             <Fill><img src={three} alt="" width="400" /></Fill>
             <Fill>
               <List ordered={false} style={{ listStyleType: 'none' }}>
-                <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> /tweets</ListItem>
                 <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> /tweet/:id</ListItem>
                 <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> /user/:id</ListItem>
                 <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> /tweet/:id/likes</ListItem>
@@ -194,7 +181,6 @@ export default class Presentation extends React.Component {
             <Fill><img src={four} alt="" width="400" /></Fill>
             <Fill>
               <List ordered={false} style={{ listStyleType: 'none' }}>
-                <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> /tweets</ListItem>
                 <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> /tweet/:id</ListItem>
                 <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> /user/:id</ListItem>
                 <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> /tweet/:id/likes</ListItem>
@@ -391,16 +377,16 @@ export default class Presentation extends React.Component {
             <span className="underline">Concepts</span>
           </Text>
           <List ordered={false} style={{ listStyleType: 'none', transform: 'scale(0.8)' }} >
-            <ListItem margin="8"> <span role="img" aria-label="next">☀️</span> Schema</ListItem>
+            <ListItem margin="8"> <span role="img" aria-label="next">☀️</span> Types</ListItem>
             <ListItem margin="8"> <span role="img" aria-label="next">✨</span> Query</ListItem>
             <ListItem margin="8"> <span role="img" aria-label="next">⭐️</span> Mutation</ListItem>
             <ListItem margin="8"> <span role="img" aria-label="next">💫</span> Resolvers</ListItem>
-            <ListItem margin="8"> <span role="img" aria-label="next">⚡️</span> Subscriptions</ListItem>
+            <ListItem margin="8"> <span role="img" aria-label="next">⚡️</span> Schema</ListItem>
           </List>
           
         </Slide>
         <Slide>
-          <Text><span role="img" aria-label="next">☀️</span><span className="underline">Schema</span></Text>
+          <Text><span role="img" aria-label="next">☀️</span><span className="underline">Types</span></Text>
           <br />  
           <img src={schema} alt="schema" width="400" />
         </Slide>
@@ -431,7 +417,11 @@ export default class Presentation extends React.Component {
             </Fit>
           </Layout>
         </Slide>
-
+        <Slide>
+          <Text>
+          <span role="img" aria-label="next">⚡️</span> Schema
+          </Text>
+        </Slide>
         <Slide>
           <Text>But, is that really</Text>
             <Heading size={4} caps> <span>enough</span></Heading>
@@ -495,7 +485,7 @@ export default class Presentation extends React.Component {
             Showing is better than talking
           </Text>
           <Heading caps size={3}>
-            <span className="underline">Demo <span role="img" aria-label="Demo">💁🏻‍♀️</span></span>
+            <span className="underline"><a href="https://developer.github.com/v4/explorer/" style={{ textDecoration: 'none', color: 'black' }}>Demo</a> <span role="img" aria-label="Demo">💁🏻‍♀️</span></span>
           </Heading>
         </Slide>
         <Slide>
