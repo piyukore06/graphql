@@ -76,6 +76,8 @@ export default class Presentation extends React.Component {
           </Heading>
         </Slide>
         <Slide>
+          <h3>What this talk is about</h3>
+          <br />
           <Layout>
             <Fill>
               <span role="img" aria-label="yes">✅</span>
@@ -90,6 +92,8 @@ export default class Presentation extends React.Component {
           </Layout>
         </Slide>
         <Slide>
+        <h3>What this talk is about</h3>
+        <br />
           <Layout>
             <Fill><span role="img" aria-label="yes">✅</span>
             <List>
@@ -362,7 +366,7 @@ export default class Presentation extends React.Component {
           <Layout>
             <Fill><img src={two} alt="" width="400" /></Fill>
             <Fill>
-              <img src={tweetQuery} alt="tweetQuery" style={{clip: 'rect(0px,60px,200px,0px)'}}/>
+              <img src={tweetQuery} alt="tweetQuery" width="500"/>
             </Fill>
           </Layout>
         </Slide>
@@ -406,11 +410,11 @@ export default class Presentation extends React.Component {
           <Text><span role="img" aria-label="next">✨</span><span className="underline">Query & it's Resolver</span></Text>
           <br />
           <Layout>
-            <Fit>
-            <img src={query} alt="query"  width="400"/>
+            <Fit style={{margin: '10px'}}>
+            <img src={query} alt="query"  width="500"/>
             </Fit>
-            <Fit>
-            <img src={queryResolver} alt="queryResolver"  width="400"/>
+            <Fit style={{margin: '10px'}}>
+            <img src={queryResolver} alt="queryResolver"  width="550"/>
             </Fit>
           </Layout>
         </Slide>
@@ -419,11 +423,11 @@ export default class Presentation extends React.Component {
           <Text><span role="img" aria-label="next">⭐️</span><span className="underline">Mutation & it's Resolver</span></Text>
           <br />
           <Layout>
-            <Fit>
-            <img src={mutation} alt="mutation"  width="400"/>
+            <Fit style={{margin: '10px'}}>
+            <img src={mutation} alt="mutation"  width="550"/>
             </Fit>
-            <Fit>
-            <img src={mutationResolver} alt="mutationResolver"  width="400"/>
+            <Fit style={{margin: '10px'}}>
+            <img src={mutationResolver} alt="mutationResolver"  width="550"/>
             </Fit>
           </Layout>
         </Slide>
@@ -453,10 +457,10 @@ export default class Presentation extends React.Component {
           <br />
           <Layout>
             <Fit>
-            <img src={graphql} alt="query"  width="500" />
+            <img src={graphql} alt="query"  width="600" />
             </Fit>
             <Fit>
-            <img src={refetchQueries} alt="queryResolver"  width="500" />
+            <img src={refetchQueries} alt="queryResolver"  style={{margin: '10px'}} width="500" />
             </Fit>
           </Layout>
         </Slide>
@@ -479,10 +483,10 @@ export default class Presentation extends React.Component {
           <br />
           <Layout>
             <Fit>
-            <img src={graphiql} alt="query"  width="600"  />
+            <img src={graphiql} alt="query" style={{margin: '10px'}} width="600"  />
             </Fit>
             <Fit>
-            <img src={apolloDevtools} alt="queryResolver"  width="600" />
+            <img src={apolloDevtools} alt="queryResolver"  style={{margin: '10px'}} width="600" />
             </Fit>
           </Layout>
         </Slide>
