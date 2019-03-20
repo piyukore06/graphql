@@ -10,8 +10,6 @@ import {
   Layout,
   Fill,
   Text,
-  CodePane,
-  Notes,
   Fit,
 } from 'spectacle';
 import Particles from 'react-particles-js';
@@ -33,116 +31,22 @@ import three from './assets/tweet-3.png';
 import four from './assets/tweet-4.png';
 
 import graphql from './assets/graphql.png';
+import apolloDevtools from './assets/apolloDevtools.png';
+import deprecations from './assets/deprecations.png';
+import graphiql from './assets/graphiql.png';
+import mutation from './assets/mutation.png';
+import mutationResolver from './assets/mutationResolver.png';
+import query from './assets/query.png';
+import schema from './assets/schema.png';
+import queryResolver from './assets/queryResolver.png';
+import refetchQueries from './assets/refetchQueries.png';
+import tweetQuery from './assets/tweetQuery.png';
 import graphql1 from './assets/graphql1.png';
 import './app.css';
 import './../node_modules/prismjs/themes/prism.css';
 // Require CSS
 require('normalize.css');
 
-const exampleDeck = `
-  {
-    query tweet(id: ID!) {
-      id
-      title
-      likesCount
-      retweetCount
-      commentsCount
-      likes(last: 1) {
-        likedBy {
-          name
-        }
-      }
-      comments(last: 1) {
-        text
-        commentedBy {
-          name
-          timestamp
-        }
-        likeCount
-        likedBy {
-          name
-        }
-      }
-    } 
-  }
-`.trim();
-
-const schema = `
-type Book {
-  title: String
-  author: Author
-}
-
-type Author {
-  name: String
-  books: [Book]
-}
-`.trim();
-
-const query1 = `
-type Query {
-  getBooks: [Book]
-  getAuthors: [Author]
-}
-`.trim();
-
-const query2 = `
-query {
-  getBooks {
-    title
-    author {
-      name
-    }
-  }
-
-  getAuthors {
-    name
-  }
-}
-`.trim();
-
-const mutation1 = `
-type Mutation {
-  addBook(title: String, author: String): Book
-}
-`.trim();
-
-const mutation2 = `
-mutation {
-  addBook(title: "Fox in Socks", author: "Dr. Seuss") {
-    title
-    author {
-      name
-    }
-  }
-}
-`.trim();
-
-const resolver = `
-const resolvers = {
-  Query: {
-    author(parent, args, context, info) {
-      return find(authors, { id: args.id });
-    },
-  },
-};
-`.trim();
-
-const subscription1 = `
-type Subscription {
-  bookAdded: Book
-}
-`;
-
-const subscription2 = `
-const resolvers = {
-  Subscription: {
-    bookAdded: {
-      subscribe: () => pubsub.asyncIterator([BOOK_ADDED]),
-    },
-  },
-};
-`.trim();
 const theme = createTheme(
   {
     primary: 'white',
@@ -166,10 +70,39 @@ export default class Presentation extends React.Component {
         showFullscreenControl={false}
       >
         <Slide>
-          <Text style={{fontSize: '60px'}}>Going</Text>
+          <Text style={{fontSize: '60px'}}>Intro to</Text>
           <Heading size={1} className="name">
             GraphQL
           </Heading>
+        </Slide>
+        <Slide>
+          <Layout>
+            <Fill>
+              <span role="img" aria-label="yes">✅</span>
+              <List>
+                <ListItem>Basic concepts</ListItem>
+                <ListItem>Is it a good fit for your project</ListItem>
+              </List>  
+            </Fill>
+            <Fill><span role="img" aria-label="no"></span>
+            
+            </Fill>
+          </Layout>
+        </Slide>
+        <Slide>
+          <Layout>
+            <Fill><span role="img" aria-label="yes">✅</span>
+            <List>
+              <ListItem>Basic concepts</ListItem>
+              <ListItem>Is it a good fit for your project</ListItem>
+            </List> 
+            </Fill>
+            <Fill><span role="img" aria-label="no">🚫</span>
+            <List>
+              <ListItem>Deep dive</ListItem>
+            </List> 
+            </Fill>
+          </Layout>
         </Slide>
         <Slide>
           <Layout>
@@ -429,12 +362,7 @@ export default class Presentation extends React.Component {
           <Layout>
             <Fill><img src={two} alt="" width="400" /></Fill>
             <Fill>
-              <CodePane
-                lang="js"
-                source={exampleDeck}
-                theme="light"
-                style={{fontSize: '15px'}}
-              />
+              <img src={tweetQuery} alt="tweetQuery" style={{clip: 'rect(0px,60px,200px,0px)'}}/>
             </Fill>
           </Layout>
         </Slide>
@@ -470,96 +398,36 @@ export default class Presentation extends React.Component {
         <Slide>
           <Text><span role="img" aria-label="next">☀️</span><span className="underline">Schema</span></Text>
           <br />  
-          <CodePane
-            lang="js"
-            source={schema}
-            theme="light"
-            style={{fontSize: '15px', width: '500px', minWidth: 'unset'}}
-          />
+          <img src={schema} alt="schema" width="400" />
         </Slide>
         
         
         <Slide>
-          <Text><span role="img" aria-label="next">✨</span><span className="underline">Query</span></Text>
+          <Text><span role="img" aria-label="next">✨</span><span className="underline">Query & it's Resolver</span></Text>
+          <br />
           <Layout>
             <Fit>
-              <CodePane
-                margin={10}
-                lang="js"
-                source={query1}
-                theme="light"
-                style={{fontSize: '15px', width: '500px', minWidth: 'unset'}}
-              />
+            <img src={query} alt="query"  width="400"/>
             </Fit>
             <Fit>
-            <CodePane
-                margin={10}
-                lang="js"
-                source={query2}
-                theme="light"
-                style={{fontSize: '15px', width: '500px', minWidth: 'unset'}}
-              />
+            <img src={queryResolver} alt="queryResolver"  width="400"/>
             </Fit>
           </Layout>
         </Slide>
 
         <Slide>
-          <Text><span role="img" aria-label="next">⭐️</span><span className="underline">Mutation</span></Text>
+          <Text><span role="img" aria-label="next">⭐️</span><span className="underline">Mutation & it's Resolver</span></Text>
+          <br />
           <Layout>
             <Fit>
-              <CodePane
-                margin={10}
-                lang="js"
-                source={mutation1}
-                theme="light"
-                style={{fontSize: '15px', width: '500px', minWidth: 'unset'}}
-              />
+            <img src={mutation} alt="mutation"  width="400"/>
             </Fit>
             <Fit>
-            <CodePane
-                margin={10}
-                lang="js"
-                source={mutation2}
-                theme="light"
-                style={{fontSize: '15px', width: '500px', minWidth: 'unset'}}
-              />
+            <img src={mutationResolver} alt="mutationResolver"  width="400"/>
             </Fit>
           </Layout>
-        </Slide>
-        <Slide>
-          <Text><span role="img" aria-label="next">💫</span><span className="underline">Resolvers</span></Text>
-          <br />  
-          <CodePane
-            lang="js"
-            source={resolver}
-            theme="light"
-            style={{fontSize: '15px', width: '500px', minWidth: 'unset'}}
-          />
         </Slide>
 
-        <Slide>
-          <Text><span role="img" aria-label="next">⚡️</span><span className="underline">Subscription</span></Text>
-          <Layout>
-            <Fit>
-              <CodePane
-                margin={10}
-                lang="js"
-                source={subscription1}
-                theme="light"
-                style={{fontSize: '15px', width: '500px', minWidth: 'unset'}}
-              />
-            </Fit>
-            <Fit>
-            <CodePane
-                margin={10}
-                lang="js"
-                source={subscription2}
-                theme="light"
-                style={{fontSize: '15px', width: '600px', minWidth: 'unset'}}
-              />
-            </Fit>
-          </Layout>
-        </Slide>
         <Slide>
           <Text>But, is that really</Text>
             <Heading size={4} caps> <span>enough</span></Heading>
@@ -570,27 +438,53 @@ export default class Presentation extends React.Component {
           <Text>What are the constraints&nbsp;
             <span className="underline">Modern APIs</span>&nbsp; generally concerned with?
           </Text>
+          <List ordered={false} style={{ listStyleType: 'none', transform: 'scale(0.8)' }}>
+            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Efficiency</ListItem>
+            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Predictability</ListItem>
+            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Versioning</ListItem>
+            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Security</ListItem>
+            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Caching</ListItem>
+            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Tooling</ListItem>
+            <ListItem margin="8"> <span role="img" aria-label="next">👉🏻</span> Documentation</ListItem>
+          </List>
         </Slide>
         <Slide>
           <Text>1. Efficiency</Text>
+          <br />
+          <Layout>
+            <Fit>
+            <img src={graphql} alt="query"  width="500" />
+            </Fit>
+            <Fit>
+            <img src={refetchQueries} alt="queryResolver"  width="500" />
+            </Fit>
+          </Layout>
         </Slide>
         <Slide>
           <Text>2. Predictability</Text>
         </Slide>
         <Slide>
           <Text>3. Versioning</Text>
+          <br />
+          <img src={deprecations} alt="query" />
         </Slide>
         <Slide>
           <Text>4. Security</Text>
         </Slide>
         <Slide>
-          <Text>5. Tooling</Text>
+          <Text>5. Caching</Text>
         </Slide>
         <Slide>
-          <Text>6. Documentation</Text>
-        </Slide>
-        <Slide>
-          <Text>7. Caching</Text>
+          <Text>6. Tooling & 7. Documentation</Text>
+          <br />
+          <Layout>
+            <Fit>
+            <img src={graphiql} alt="query"  width="600"  />
+            </Fit>
+            <Fit>
+            <img src={apolloDevtools} alt="queryResolver"  width="600" />
+            </Fit>
+          </Layout>
         </Slide>
         <Slide>
           <Text>
